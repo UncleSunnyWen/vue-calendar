@@ -1,4 +1,5 @@
 # vue-calendar
+![ScreenRecord](./vue-calendar.gif)
 
 ## Project setup
 ```
