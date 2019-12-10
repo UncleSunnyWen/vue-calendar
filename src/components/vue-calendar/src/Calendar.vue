@@ -30,7 +30,7 @@
                             <p :class="{'calendar_day_checked': isCheckedDay(date), 'calendar_day_today': isToday(date), 'calendar_day_not': !isShowWeek && isNotCurrentMonthDay(date,i)}"
                                class="calendar_day"
                                ref="calendarDay">
-                                <span class="solar">{{date.day}}</span>
+                                <span class="solar">{{isToday(date)?'今':date.day}}</span>
                                 <span class="lunar">{{lunar(date)}}</span>
                             </p>
                             <div :style="{'background': markDateColor(date)}" class="calendar_dot"></div>
@@ -148,7 +148,7 @@
                         val.forEach((item, index) => {
                             if (item.color === undefined) {
                                 let obj = {};
-                                obj.color = '#1c71fb';
+                                obj.color = '#3A9DFA';
                                 if (typeof item === 'string' || typeof item === 'number') {
                                     item = [item];
                                 }
@@ -605,7 +605,7 @@
     }
 
     .calendar_day_today {
-        background: #E3F2FD;
+        background: #DEF0FC;
     }
 
     .calendar_day_checked {
@@ -624,7 +624,7 @@
 
     .calendar_day_today .solar,
     .calendar_day_today .lunar {
-        color: #2196F3;
+        color: #4290D0;
     }
 
     .calendar_day_checked .solar,
@@ -649,7 +649,7 @@
         align-items center
         justify-content center
         width 100%
-        color #E3F2FD
+        color #D6E9FA
         font-size 180px
     }
 
@@ -664,12 +664,12 @@
 
     .today {
         position: absolute;
-        background: #E3F2FD;
-        color: #2196F3;
+        background: #DEF0FC;
+        color: #4290D0;
         font-size 10px
         margin: 0 10px;
         padding 0 4px
-        border: 1px solid #2196F3;
+        border: 1px solid #4290D0;
         border-radius: 4px;
         text-align center
     }
