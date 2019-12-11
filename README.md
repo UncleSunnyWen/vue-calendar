@@ -21,6 +21,11 @@ npm run build
 npm run lint
 ```
 
+### Build Library
+```
+npm run lib
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
