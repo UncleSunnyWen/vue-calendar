@@ -5,13 +5,12 @@
  */
 
 // 导入组件，组件必须声明 name
-// import DatetimePicker from './src/DatetimePicker.vue'
 import Calendar from './src/Calendar.vue'
 
 // 为组件提供 install 安装方法，供按需引入
-// DatetimePicker = function (Vue) {
-//     Vue.component(DatetimePicker.name, DatetimePicker)
-// }
+Calendar.install = function (Vue) {
+    Vue.component(Calendar.name, Calendar)
+}
 
 // 默认导出组件
 export default Calendar
