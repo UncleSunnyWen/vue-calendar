@@ -1,12 +1,12 @@
 {
   "name": "vue-calendar",
-  "version": "0.1.0",
+  "version": "1.0.0-beta.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name calendar --dest lib src/components/index.js"
+    "lib": "vue-cli-service build --target lib --name vue-calendar --dest lib src/components/index.js"
   },
   "dependencies": {
     "core-js": "^3.4.3",

@@ -1,11 +1,6 @@
-/**
- * @Description:    导出整个库
- * @Author:         TSY
- * @CreateDate:     2019/8/31 12:30
- */
-
 // 导入时间选择器组件
 import Calendar from './vue-calendar'
+const version = '1.0.0-beta.1';
 // 存储组件列表
 const components = [
     Calendar
@@ -21,9 +16,14 @@ const install = function (Vue) {
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue)
 }
-export default {
+export {
     // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
     install,
+    version,
     // 以下是组件列表
-    ...components
+    Calendar
+}
+export default {
+    install,
+    version
 }
