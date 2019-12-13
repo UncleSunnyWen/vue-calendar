@@ -660,6 +660,7 @@
         height 30px
         z-index 2
         border-bottom 1px solid #EEEEEE
+        background white
     }
 
     .today {
