@@ -516,9 +516,6 @@
                 }
                 // 无节日
                 return calendarTextObj.IDayCn
-            },
-            log(e) {
-                console.log(e);
             }
         }
     }
