@@ -460,8 +460,8 @@
                 if (!this.isLastWeekInCurrentMonth) {
                     this.yearOfCurrentShow = this.lastMonthYear;
                     this.monthOfCurrentShow = this.lastMonth;
+                    this.calculateCalendarOfThreeMonth(this.yearOfCurrentShow, this.monthOfCurrentShow);
                 }
-                this.calculateCalendarOfThreeMonth(this.yearOfCurrentShow, this.monthOfCurrentShow);
             },
             getNextMonth() {//获取下个月日历
                 this.translateIndex -= 1;
@@ -469,8 +469,8 @@
                 if (!this.isNextWeekInCurrentMonth) {
                     this.yearOfCurrentShow = this.nextMonthYear;
                     this.monthOfCurrentShow = this.nextMonth;
+                    this.calculateCalendarOfThreeMonth(this.yearOfCurrentShow, this.monthOfCurrentShow);
                 }
-                this.calculateCalendarOfThreeMonth(this.yearOfCurrentShow, this.monthOfCurrentShow);
             },
             markDateColor(date) {//当前日期是否需要标记
                 let dateString = `${date.year}/${this.fillNumber(date.month + 1)}/${this.fillNumber(date.day)}`;
