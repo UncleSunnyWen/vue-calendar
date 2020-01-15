@@ -144,6 +144,7 @@
             },
             markDate: {
                 handler(val) {
+                    this.markDateColorObj = [];
                     if (val) {
                         val.forEach((item, index) => {
                             if (item.color === undefined) {
