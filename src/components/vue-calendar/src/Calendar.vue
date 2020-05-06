@@ -127,7 +127,6 @@
                 handler(val) {
                     if (!(val instanceof Date)) {
                         throw new Error(`The calendar component's defaultDate must be date type!`);
-                        return
                     }
                     this.$set(this.checkedDate, 'day', val.getDate());
                     this.calculateCalendarOfThreeMonth(val.getFullYear(), val.getMonth());
@@ -146,7 +145,7 @@
                 handler(val) {
                     this.markDateColorObj = [];
                     if (val) {
-                        val.forEach((item, index) => {
+                        val.forEach((item) => {
                             if (item.color === undefined) {
                                 let obj = {};
                                 obj.color = '#3A9DFA';
@@ -158,18 +157,23 @@
                             }
                             item.date = this.dateFormat(item.date);
                             item.date.forEach(date => {
-                                this.markDateColorObj[date] = item.color;
+                                this.$set(this.markDateColorObj, date, item.color)
                             })
                         })
                     }
                 },
+                deep: true,
                 immediate: true
             },
             isShowWeekView: {
                 handler(val) {
                     if (val) {
                         this.$nextTick(() => {
-                            this.showWeek();
+                            this.showWeek()
+                        })
+                    } else {
+                        this.$nextTick(() => {
+                            this.showMonth()
                         })
                     }
                 },
@@ -194,7 +198,7 @@
         methods: {
             initDom() {//初始化日历dom
                 this.$nextTick(() => {
-                    this.calendarItemHeight = this.$refs.calendarDay[0].offsetHeight + 10;
+                    this.calendarItemHeight = this.$refs.calendarItem && this.$refs.calendarItem[0].offsetHeight;
                     this.calendarWeekTitleHeight = this.$refs.weekTitle.offsetHeight;
                     this.calendarBarHeight = this.$refs.bar.offsetHeight;
 
@@ -347,7 +351,7 @@
                     };
                 }
             },
-            touchEnd(e) {//监听touch结束事件
+            touchEnd() {//监听touch结束事件
                 this.isTouching = false;
                 this.isWeekSwitch = false;
                 if (Math.abs(this.touch.x) > Math.abs(this.touch.y) && Math.abs(this.touch.x) > 0.2) {
@@ -585,8 +589,7 @@
     }
 
     .calendar_item {
-        width px2vw(100px)
-        margin-left px2vw(5px)
+        width 14.13333335%
         flexContent()
         flex-direction column
         z-index 1
