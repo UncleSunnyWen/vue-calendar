@@ -27,7 +27,7 @@
                         </p>
                         <div :key="i + j" @click="clickCalendarDay(date)" class="calendar_item" ref="calendarItem"
                              v-for="(date, j) in item">
-                            <p :class="{'calendar_day_checked': isCheckedDay(date), 'calendar_day_today': isToday(date), 'calendar_day_not': !isShowWeek && isNotCurrentMonthDay(date,i)}"
+                            <p :class="{'calendar_day_checked': isCheckedDay(date), 'calendar_day_today': isToday(date), 'calendar_day_not': !isShowWeek && !isToday(date) && isNotCurrentMonthDay(date,i)}"
                                class="calendar_day"
                                ref="calendarDay">
                                 <span class="solar">{{isToday(date)?'今':date.day}}</span>
