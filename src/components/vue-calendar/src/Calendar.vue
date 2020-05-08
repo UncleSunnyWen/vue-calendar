@@ -32,8 +32,8 @@
                                ref="calendarDay">
                                 <span class="solar">{{isToday(date)?'今':date.day}}</span>
                                 <span class="lunar">{{lunar(date)}}</span>
+                                <span :style="{'background': markDateColor(date)}" class="calendar_dot"></span>
                             </p>
-                            <div :style="{'background': markDateColor(date)}" class="calendar_dot"></div>
                         </div>
                     </div>
                 </li>
@@ -148,7 +148,7 @@
                         val.forEach((item) => {
                             if (item.color === undefined) {
                                 let obj = {};
-                                obj.color = '#3A9DFA';
+                                obj.color = '#ff6034';
                                 if (typeof item === 'string' || typeof item === 'number') {
                                     item = [item];
                                 }
@@ -181,6 +181,14 @@
             },
             calendarGroupHeight(val) {
                 this.$emit('height', val + this.calendarWeekTitleHeight + this.calendarBarHeight)
+            },
+            currentMonthRange: {
+                handler(val, oldVal) {
+                    if (val && JSON.stringify(val) !== JSON.stringify(oldVal)) {
+                        this.$emit('currentmonthrange', val)
+                    }
+                },
+                immediate: true
             }
         },
         computed: {
@@ -193,6 +201,13 @@
                 } else {
                     return this.formatDate(new Date(this.checkedDate.year, this.checkedDate.month, this.checkedDate.day), 'yyyy年mm月dd日 周D');
                 }
+            },
+            currentMonthRange: function () {
+                let temp = this.calendarOfMonth[1][0];
+                let from = new Date(temp.year, temp.month, temp.day);
+                let to = new Date(from);
+                to.setDate(to.getDate() + 42);
+                return {from, to}
             }
         },
         methods: {
@@ -479,7 +494,15 @@
             },
             markDateColor(date) {//当前日期是否需要标记
                 let dateString = `${date.year}/${this.fillNumber(date.month + 1)}/${this.fillNumber(date.day)}`;
-                return this.markDateColorObj[dateString];
+                // return this.markDateColorObj[dateString];
+                let color = this.markDateColorObj[dateString]
+                if (color) {
+                    color = this.isCheckedDay(date) ? 'white' :
+                        (this.isToday(date) ? '#94CCFB' : '#ADBDCB');
+                    return color;
+                } else {
+                    return undefined;
+                }
             },
             fillNumber(val) {//小于10，在前面补0
                 return val > 9 ? val : '0' + val
@@ -598,11 +621,11 @@
     .calendar_day {
         width px2vw(97.5px)
         height px2vw(97.5px)
-        border-radius 2px
+        border-radius 50%
         fontSize(28px)
         flexContent()
         flex-direction column
-        margin-bottom px2vw(8px)
+        margin-bottom px2vw(2px)
     }
 
     .calendar_day_today {
@@ -610,7 +633,7 @@
     }
 
     .calendar_day_checked {
-        background main-color
+        background #0089FF
     }
 
     .solar {
@@ -625,7 +648,7 @@
 
     .calendar_day_today .solar,
     .calendar_day_today .lunar {
-        color: #4290D0;
+        color: #0089FF;
     }
 
     .calendar_day_checked .solar,
@@ -635,13 +658,14 @@
 
     .calendar_day_not .solar,
     .calendar_day_not .lunar {
-        color #E0E0E0
+        color #E2E4E5
     }
 
     .calendar_dot {
         width 5px
         height 5px
         border-radius 50%
+        margin 2px
     }
 
     .calendar_month {
@@ -667,11 +691,11 @@
     .today {
         position: absolute;
         background: #DEF0FC;
-        color: #4290D0;
+        color: #0089FF;
         font-size 10px
         margin: 0 10px;
         padding 0 4px
-        border: 1px solid #4290D0;
+        border: 1px solid #0089FF;
         border-radius: 4px;
         text-align center
     }
